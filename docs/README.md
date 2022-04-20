@@ -30,6 +30,8 @@ curl -L https://cli-docs.vercel.app/lotus-cli.tar.gz > cli-0.1.tar.gz && tar -xz
 
 ```
 
+
+
 ### Create
 
 To create a Lotus app inside the current directory, we can invoke
