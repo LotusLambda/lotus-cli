@@ -20,14 +20,13 @@ It enables you to create and manage your Lotus apps straight from the comfort of
 Download the latest release using wget:
 
 ```
-wget https://github.com/lotuslambda/lotus-cli/releases/download/v0.1/cli-0.1.tar.gz
-&& tar -xzvf ./cli-0.1.tar.gz && rm ./cli-0.1.tar.gz
+wget https://cli-docs.vercel.app/lotus-cli.tar.gz && tar -xzvf ./cli-0.1.tar.gz && rm ./cli-0.1.tar.gz
 ```
 
 or  Curl:
 
 ``` 
-curl -L https://github.com/lotuslambda/lotus-cli/releases/download/v0.1/cli-0.1.tar.gz > cli-0.1.tar.gz && tar -xzvf ./cli-0.1.tar.gz && rm ./cli-0.1.tar.gz
+curl -L https://cli-docs.vercel.app/lotus-cli.tar.gz > cli-0.1.tar.gz && tar -xzvf ./cli-0.1.tar.gz && rm ./cli-0.1.tar.gz
 ```
 
 and move to usr/bin
