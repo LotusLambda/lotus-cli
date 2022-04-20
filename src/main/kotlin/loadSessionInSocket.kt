@@ -22,6 +22,8 @@ import java.io.File
 suspend fun DefaultWebSocketServerSession.loadSessionInSocket(
     files: LoadAppFiles, watchComponents: KWatchChannel?, t: Terminal
 ) {
+
+    println("Connecting to session...")
     val app = buildEngine {
         appConfig {
             files.appFile.readText()
@@ -87,6 +89,7 @@ suspend fun DefaultWebSocketServerSession.loadSessionInSocket(
             ?.filter { it.file.isFile }
             ?.collect {
                 t.println(TextColors.green("Reloading ${it.file.path} to $app"))
+                println(it.file.readText())
                 app?.execute(Action.Render(it.file.readText(), emptyMap()))
             }
 

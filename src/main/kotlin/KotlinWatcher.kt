@@ -1,4 +1,5 @@
 import FileEvent.*
+import com.sun.nio.file.SensitivityWatchEventModifier
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -69,7 +70,8 @@ class KWatchChannel(
                     if (!subPath.endsWith(extension))
                         return FileVisitResult.CONTINUE
 
-                registeredKeys += subPath.register(watchService, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE)
+                registeredKeys += subPath.register(watchService,arrayOf(ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE),
+                    SensitivityWatchEventModifier.HIGH)
                 return FileVisitResult.CONTINUE
             }
         })
