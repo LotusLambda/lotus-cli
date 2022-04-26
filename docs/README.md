@@ -31,6 +31,12 @@ curl -L https://cli-docs.vercel.app/lotus-cli > lotus-cli && chmod +x lotus-cli 
 ```
 
 
+### Preview apps
+
+To preview Lotus apps on Android, you can download the Lotus Gallery apk:
+[here](https://pjkjhkozufxahmfglihr.supabase.in/storage/v1/object/public/android.debug/app-debug.apk)
+
+
 
 ### Create
 
