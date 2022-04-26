@@ -38,7 +38,7 @@ To create a Lotus app inside the current directory, we can invoke
 
 
 ``` 
-./lotus-cli create
+lotus-cli create
 
 ``` 
 
@@ -49,7 +49,7 @@ This will create the basic Lotus file structure and App file.
 
 After creating the Lotus app, we can use
 ``` 
-./lotus-cli run
+lotus-cli run
 ``` 
 
 inside the app folder to start the Lotus server at localhost:5000.
@@ -60,7 +60,7 @@ To enable live preview during the development, we can start the
 preview server by using the `watch` command inside the app folder.
 
 ``` 
-./lotus-cli watch
+lotus-cli watch
 ``` 
 
 This starts a Lotus preview server at localhost:5001, which watches the filesystem for changes and renders the latest updated file as a UI preview.
@@ -82,14 +82,14 @@ Create command simply creates a basic Lotus app inside the current app folder.
 After using 
 
 ``` 
-./lotus-cli create
+lotus-cli create
 ``` 
 
 the user is given a name prompt, which can also be passed in by using the `--name`
 flag:
 
 ``` 
-./lotus-cli create --name=MyApp
+lotus-cli create --name=MyApp
 ``` 
 
 ### Created structure
@@ -113,7 +113,7 @@ Run command starts a Lotus app server inside the current app folder.
 After using 
 
 ``` 
-./lotus-cli run
+lotus-cli run
 ``` 
 
 a server starts running the app at localhost:5000 and exposing a QR code to connect from the Lotus Gallery app.
@@ -127,8 +127,8 @@ Lotus cli supports following arguments:
 
 | Argument | Description                               | Usage                         |
 |----------|-------------------------------------------|-------------------------------|
-| --src    | Root folder of the Lotus app to run.  | `./lotus-cli run --src=MyApp` |
-| --port   | Port to start the Lotus app server on | `./lotus-cli run --port=5000` |
+| --src    | Root folder of the Lotus app to run.  | `lotus-cli run --src=MyApp` |
+| --port   | Port to start the Lotus app server on | `lotus-cli run --port=5000` |
 
 
 
@@ -142,7 +142,7 @@ Watch command starts a Lotus preview server inside the current app folder.
 After using 
 
 ``` 
-./lotus-cli watch
+lotus-cli watch
 ``` 
 
 a server starts running the app at localhost:5001 and exposing a QR code to connect from the Lotus Gallery app.
@@ -156,9 +156,9 @@ Lotus cli supports following arguments:
 
 | Argument | Description                               | Usage                         |
 |----------|-------------------------------------------|-------------------------------|
-| --src    | Root folder of the Lotus app to preview.  | `./lotus-cli watch --src=MyApp` |
-| --port   | Port to start the Lotus preview server on | `./lotus-cli watch --port=5001` |
-| --web | Turn on the web preview. | `./lotus-cli watch --web` |
+| --src    | Root folder of the Lotus app to preview.  | `lotus-cli watch --src=MyApp` |
+| --port   | Port to start the Lotus preview server on | `lotus-cli watch --port=5001` |
+| --web | Turn on the web preview. | `lotus-cli watch --web` |
 
 *Web argument is coming in the next release*
 
