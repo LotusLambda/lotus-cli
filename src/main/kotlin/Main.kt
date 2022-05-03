@@ -9,13 +9,15 @@ import com.github.ajalt.mordant.rendering.TextColors.*
 import com.github.ajalt.mordant.rendering.TextStyles
 import com.github.ajalt.mordant.terminal.Terminal
 import com.lotuslambda.flowmachine.engine.*
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.http.cio.websocket.*
 import io.ktor.network.sockets.*
-import io.ktor.server.*
-import io.ktor.server.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
-import io.ktor.server.routing.*
-import io.ktor.server.websocket.*
+import io.ktor.websocket.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -78,7 +80,7 @@ class Watch : CliktCommand() {
             "0.0.0.0"
         }
 
-        t.println(TextStyles.bold(green("Starting server at ${white("$localIp:$portToRunOn")}")))
+        t.println(TextStyles.bold(green("Preparing server at ${white("$localIp:$portToRunOn")}")))
 
         //parse app file
         val server = embeddedServer(CIO, port = portToRunOn) {
@@ -90,18 +92,20 @@ class Watch : CliktCommand() {
             }
 
             routing {
+
+                get("/ping") {
+                    call.respond(HttpStatusCode.OK)
+                }
                 webSocket("/app") {
-                    loadSessionInSocket(files, watchComponents,t)
-                    t.println(green("Loaded session in socket."))
+                    loadSessionInSocket(files, watchComponents, t)
                 }
             }
-            println(TermQRCode().generate("connect:::http://$localIp:$portToRunOn/app:::null:::null"))
         }
+        t.println(TermQRCode().generate("connect:::http://$localIp:$portToRunOn/app:::null:::null"))
+        t.println(TextStyles.bold(green("Starting server at ${white("$localIp:$portToRunOn")}")))
         server.start(true)
-
+        t.println(TextStyles.bold(green("Started server at ${white("$localIp:$portToRunOn")}")))
     }
-
-
 }
 
 

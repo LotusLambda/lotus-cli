@@ -8,7 +8,7 @@ import com.lotuslambda.flowmachine.engine.dependencies.ProjectDependencyResolver
 import com.lotuslambda.flowmachine.engine.state.StateSnapshot
 import com.lotuslambda.flowmachine.engine.state.toJsonElement
 import io.ktor.http.ContentType.Application.Json
-import io.ktor.server.websocket.*
+import io.ktor.http.cio.websocket.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.catch
