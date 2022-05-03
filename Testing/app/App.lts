@@ -1,5 +1,0 @@
-App {
-     Route("home"){
-       Text("asdsf")
-     }
-}
