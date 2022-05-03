@@ -34,7 +34,7 @@ curl -L https://bit.ly/3kFvawc > lotus-cli && chmod +x lotus-cli && mv lotus-cli
 ### Preview apps
 
 To preview Lotus apps on Android, you can download the Lotus Gallery apk:
-[here](https://pjkjhkozufxahmfglihr.supabase.in/storage/v1/object/public/android.debug/app-debug.apk)
+[here](https://pjkjhkozufxahmfglihr.supabase.co/storage/v1/object/public/android.debug/app-debug.apk)
 
 
 
