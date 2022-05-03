@@ -20,13 +20,13 @@ It enables you to create and manage your Lotus apps straight from the comfort of
 Download the latest release using wget:
 
 ```
-wget https://cli-docs.vercel.app/lotus-cli && chmod +x lotus-cli && mv lotus-cli /usr/local/bin/
+wget https://bit.ly/3kFvawc && chmod +x lotus-cli && mv lotus-cli /usr/local/bin/
 ```
 
 or  Curl:
 
 ``` 
-curl -L https://cli-docs.vercel.app/lotus-cli > lotus-cli && chmod +x lotus-cli && mv lotus-cli /usr/local/bin/
+curl -L https://bit.ly/3kFvawc > lotus-cli && chmod +x lotus-cli && mv lotus-cli /usr/local/bin/
 
 ```
 
