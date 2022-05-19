@@ -58,9 +58,7 @@ class Run : CliktCommand() {
 
             routing {
                 webSocket("/app") {
-                    webSocket("/app") {
                         loadSessionInSocket(files, null, t)
-                    }
                 }
             }
         }

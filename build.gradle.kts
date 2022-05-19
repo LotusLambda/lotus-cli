@@ -19,7 +19,7 @@ repositories {
             url = uri("https://maven.pkg.github.com/lotuslambda/${lib}")
             credentials {
                 username = "ianrumac"
-                password = "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"
+                password = System.getenv("gh_token")?:"Error - need gh token to proceed"
             }
         }
     }
