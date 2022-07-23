@@ -23,7 +23,6 @@ repositories {
             }
         }
     }
-
 }
 
 dependencies {

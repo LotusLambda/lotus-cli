@@ -22,7 +22,6 @@ object QRterminal {
             val bitMatrix = MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, qrParam)
             s = toAscii(bitMatrix)
         } catch (e: WriterException) {
-            // TODO Auto-generated catch block
             e.printStackTrace()
         }
         return s
@@ -34,7 +33,6 @@ object QRterminal {
             for (cols in 0 until bitMatrix.width) {
                 val x = bitMatrix[rows, cols]
                 if (!x) {
-                    // white
                     sb.append("\u001b[47m  \u001b[0m")
                 } else {
                     sb.append("\u001b[40m  \u001b[0m")

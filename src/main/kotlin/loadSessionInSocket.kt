@@ -1,5 +1,3 @@
-import com.github.ajalt.clikt.output.TermUi.echo
-import com.github.ajalt.colormath.CssColors.orange
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.rendering.TextColors.red
 import com.github.ajalt.mordant.terminal.Terminal
@@ -7,7 +5,6 @@ import com.lotuslambda.flowmachine.engine.*
 import com.lotuslambda.flowmachine.engine.dependencies.ProjectDependencyResolver
 import com.lotuslambda.flowmachine.engine.state.StateSnapshot
 import com.lotuslambda.flowmachine.engine.state.toJsonElement
-import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.cio.websocket.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.*
@@ -18,13 +15,12 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
 import parser.models.ComponentSpecification
-import parser.newparser.parseDSL
 import parser.parseComponentFromText
 import parser.utils.componentToDSL
 import java.io.File
 
 suspend fun DefaultWebSocketServerSession.loadSessionInSocket(
-    files: LoadAppFiles, watchComponents: KWatchChannel?, t: Terminal
+    files: LoadAppFiles, mode: Mode, terminalOutput: Terminal
 ) {
 
     println("Connecting to session...")
@@ -88,11 +84,12 @@ suspend fun DefaultWebSocketServerSession.loadSessionInSocket(
 
     }
 
+    if(mode is Mode.Watch)
     launch {
-        watchComponents?.listen()
-            ?.filter { it.file.isFile && it is FileEvent.Modified }
-            ?.collect {
-                t.println(TextColors.green("Reloading ${it.file.path} to $app"))
+        mode.watcher.listen()
+            .filter { it.file.isFile && it is FileEvent.Modified }
+            .collect {
+                terminalOutput.println(TextColors.green("Reloading ${it.file.path} to $app"))
                 println(it.file.readText())
                 val txt = it.file.readText()
                 if (txt.isNotEmpty())
@@ -100,7 +97,7 @@ suspend fun DefaultWebSocketServerSession.loadSessionInSocket(
                         parseComponentFromText(txt)
                         app?.execute(Action.Render(txt, emptyMap()))
                     } catch (e: Throwable) {
-                        t.println(red("Warning - file ${it.file.name} has parsing problems."))
+                        terminalOutput.println(red("Warning - file ${it.file.name} has parsing problems."))
                     }
             }
 
