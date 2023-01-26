@@ -1,5 +1,5 @@
-App {
-     Route("home"){
-       Text("tesASffsasasdfdfSDt")
-     }
-}
+App(){
+  Route("home"){
+    Text("tesASffsasasdfdfSDt")
+   }
+ }

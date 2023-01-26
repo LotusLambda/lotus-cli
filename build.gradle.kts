@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.10"
-    kotlin("plugin.serialization") version "1.6.10"
+    kotlin("jvm") version "1.7.10"
+    kotlin("plugin.serialization") version "1.7.10"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     application
 }
@@ -19,13 +19,15 @@ repositories {
             url = uri("https://maven.pkg.github.com/lotuslambda/${lib}")
             credentials {
                 username = "ianrumac"
-                password = System.getenv("gh_token")?:"Error - need gh token to proceed"
+                password = System.getenv("GH_TOKEN")?:"Error - need gh token to proceed"
             }
         }
     }
 }
 
 dependencies {
+    implementation("org.slf4j:slf4j-nop:1.7.36")
+    implementation("org.rauschig:jarchivelib:0.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("com.github.ajalt.clikt:clikt:3.4.1")
     implementation("com.lotuslambda.engine:flow-machine:0.1.1-SNAPSHOT")

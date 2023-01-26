@@ -105,6 +105,8 @@ class NetrcParser private constructor(netrc: File) {
                                 state = ParseState.REQ_KEY
                             }
                             ParseState.MACDEF -> {}
+                            ParseState.END -> {
+                            }
                         }
                     }
                 }
@@ -161,8 +163,6 @@ class NetrcParser private constructor(netrc: File) {
             get() {
                 val home = File(System.getProperty("user.home"))
                 var netrc = File(home, ".netrc")
-                println("$netrc file")
-                println("${netrc.absolutePath}")
                 if (!netrc.exists()) netrc = File(home, "_netrc") // windows variant
                 return netrc
             }

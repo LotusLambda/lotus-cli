@@ -5,6 +5,7 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import io.ktor.application.*
+import io.ktor.features.*
 import io.ktor.http.cio.websocket.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -12,11 +13,13 @@ import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.delay
+import org.slf4j.Logger
 import utils.Credentials
 import utils.NetrcParser
 import java.net.Socket
 import java.time.Duration
 import java.util.UUID
+import kotlin.system.exitProcess
 
 class Login : CliktCommand() {
 
@@ -25,7 +28,9 @@ class Login : CliktCommand() {
 
     override fun run() {
         val user = User()
-        println(user.credentials?.user?:"No user")
+        if (user.credentials?.user != null) {
+            t.println("Logged in as " + TextColors.yellow(user.credentials.user!!))
+        }
         val port = findAvailablePort(8000)
         val uuidToAssign = UUID.randomUUID()
         t.println("A link will open in your browser to log you in.")
@@ -34,7 +39,8 @@ class Login : CliktCommand() {
         var tokenToReceive: String? = null
         var email: String? = null
         t.println("Waiting for the sign...")
-        embeddedServer(CIO,port = port) {
+        embeddedServer(CIO, port = port) {
+
             install(WebSockets) {
                 pingPeriod = Duration.ofMinutes(60)
                 timeout = Duration.ofMinutes(60)
@@ -47,14 +53,21 @@ class Login : CliktCommand() {
                     tokenToReceive = call.request.queryParameters["token"]
                     email = call.request.queryParameters["email"]
                     call.respondText { "You may close the window now." }
-                    delay(100)
-                    NetrcParser.defaultFile.appendText("machine test-api.lotuslambda.com\nlogin $email\npassword $tokenToReceive")
-                    if(tokenToReceive!= null && email!=null)
-                        t.println(TextColors.green("Logged in as $email!\n" +
-                                TextColors.white(" To logout, type lotus-cli logout, to see your user, type lotus-cli user"))
-                        )
+                    if (user.credentials?.user != null) {
+                        t.println("Logged in as " + TextColors.yellow(user.credentials.user!!))
+                    }else {
 
-                    ShutDownUrl("") { 1 }.doShutdown(call)
+                        delay(100)
+                        NetrcParser.defaultFile.appendText("machine test-api.lotuslambda.com\nlogin $email\npassword $tokenToReceive")
+                        if (tokenToReceive != null && email != null)
+                            t.println(
+                                TextColors.green(
+                                    "Logged in as $email!\n" +
+                                            TextColors.white(" To logout, type lotus-cli logout, to see your user, type lotus-cli user")
+                                )
+                            )
+                    }
+                    exitProcess(1)
                 }
             }
         }.start(true)
